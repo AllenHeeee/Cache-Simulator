@@ -1,0 +1,29 @@
+Pa4 Cache Simulator report:
+Junjie He RUID 170006370
+In this assignment, I have 2 parts: 1. FIFO 2. LRU(Extra Credit Part)
+For both parts, the main data structures I used is called Cache, which contains 4 elements: valid, tag, replacement, replacement2. I used a 2-D array to hold all of the data. The row 
+int the setindex. The column is the associativity. 
+Part I(FIFO):{
+    In this part, I used the cache.valid(an int variable) to record whether the block is empty. if valid == 0, the block is empty. Otherwise, the block is occupied.
+    Cache.tag in an unsigned long int variable to store the tag index;
+    Cache.replacement is an unsigned long int variable to store the order of the tag. Each time adding a new tag into the cache, I would assgin the "replacement" with a number greater than 
+current maximum "replacement". When I need to replace the tag by using FIFO, I just need to replace the tag with minimum number of replacement in one set.
+    Cache.replacement2 is not used in this part. 
+}
+Part II(LRU; Extra Credit):{
+    In this part, I used the cache.valid(an int variable) to record whether the block is empty. if valid == 0, the block is empty. Otherwise, the block is occupied.
+    Cache.tag in an unsigned long int variable to store the tag index;
+    Cache.replacement is not used in this part.
+    Cache.replacement2 is an unsigned long int variable to store the order of the tag. Each time adding a new tag into the cache, I would update the replacement2 to 0 for the new tag
+    and minus 1 for the other old tags. When I need to replace the tag by using LRU, I just need to replace the tag with minimum number, which should be a negative number,
+ of replacement in one set.
+}
+Observation on prefetch:{
+    The prefetcher used the locality to increase the chance of hit. 
+    The numbers of write would be same between no-prefetch and with-prefetch. 
+    The number of read with-prefetch would be much greater(almost double) than number of read without prefetch;
+    The number of hit with-prefetch would be much greater than number of hit without prefetch;
+    Accordingly, the number of miss with-prefetch would be smaller than number of miss without prefetch;
+    Reasons: With prefetch, each time I got a miss, I would not only add the data in current address, but also add the data in the next address(current address + blocksize).
+Therefore, I would have more chance to get a hit in the futher, although the number of read would increase because I read one more data each time.
+}
